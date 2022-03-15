@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(231, 231, 231);
+}
+
+#main_cont_wrapper>h1 {
+    margin-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+#main_cont {
+    display: grid;
+    grid-template-columns: 1fr 0.3fr 1fr;
+    text-align: center;
+    /* border: 1px solid #000; */
+}
+#encryption_cont {
+    border-right: 1px solid #000;
+}
+#decryption_cont {
+    border-left: 1px solid #000;
+}
+#encryption_cont>h2, #decryption_cont>h2 {
+    margin-top: 3%;
+    padding-bottom: 3%;
+    margin-bottom: 3%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    /* border-left: 1px solid #000; */
+}
+#encryption_cont>textarea, #decryption_cont>textarea{
+    width: 70%;
+    margin-left: 15%;
+    resize: none;
+}
+#encryption_cont>button, #decryption_cont>button{
+    margin-top: 5%;
+    margin-left: 24%;
+    padding: 6px;
+    width: 50%;
+    text-align: center;
+}
+#reverse>button {
+    padding: 6px;
+    width: 50%;
+    text-align: center;
+    margin-top: 80%;
+}
+#encryption_cont>input, #decryption_cont>input{
+    margin-top: 5%;
+    padding: 6px;
+    width: 48%;
+    margin-left: 24%;
+    text-align: center;
+}
+#encryption_cont, #decryption_cont {
+    display: grid;
+}
