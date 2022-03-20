@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,28 +8,30 @@
     <link rel="stylesheet" href="css/main.css">
     <title>Encryption</title>
 </head>
+
 <body>
     <div id="main_cont_wrapper">
         <h1>Mircea&Vasilica Encryption</h1>
-    <div id="main_cont">
-        <div id="encryption_cont">
-            <h2>Encryption</h2>
-            <textarea name="" id="encrypt_field" cols="30" rows="10"></textarea>
-            <button id="encrypt">Encryption</button>
-            <input type="text" value="" id="key" placeholder="Enter a key">
+        <div id="main_cont">
+            <div id="encryption_cont">
+                <h2 id="encrypt_cont_text">Encryption</h2>
+                <textarea name="" id="encrypt_field" cols="30" rows="10">Ahtung wir konnen machen alles was wir wunchen</textarea>
+                <button id="encrypt">Encryption</button>
+                <input type="text" value="privet" id="key" placeholder="Enter a key">
+            </div>
+            <div id="reverse">
+                <button id="reverse_button">Reverse</button>
+            </div>
+            <div id="decryption_cont">
+                <h2 id="decrypt_cont_text">Decryption</h2>
+                <textarea name="" id="decrypted_field" cols="30" rows="10"></textarea>
+                <button id="decrypt">Decryption</button>
+                <!-- <input type="checkbox" name="" id=""> -->
+                <input type="file" id="openFile" name="" accept=".txt">
+            </div>
+        </div>
     </div>
-    <div id="reverse">
-        <button id="reverse_button">Reverse</button>
-    </div>
-    <div id="decryption_cont">
-        <h2>Decryption</h2>
-        <textarea name="" id="decrypted_field" cols="30" rows="10"></textarea>
-        <button id="decrypt">Decryption</button>
-        <!-- <input type="checkbox" name="" id=""> -->
-        <input type="file" id="openFile" name="" accept=".txt">
-    </div>
-    </div>
-</div>
-<script src="/js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
+
 </html>
