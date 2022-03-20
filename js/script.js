@@ -50,7 +50,7 @@ const encryptOperation = () => {
         //              GOD MERCIFULL PLEASE FORGIVE ME
 
         for (let j = 0; j < en_alphabet.length; j++) {
-            for (let k = key_sub.length - 1; k >= 0; k--) {
+            for (let k = 0; k < key_sub.length; k++) {
                 if (key_sub[k] == en_alphabet[j]) {
                     keyPosition.push(en_alphabet[j]);
                 }
@@ -64,6 +64,7 @@ const encryptOperation = () => {
                 }
             }
         }
+        console.log(keyPosition);
         console.log(keyPosFinal);
         // for (let j = 0; j < en_alphabet.length; j++) {
         //     for (let k = 0; k < key_sub.length; k++) {
@@ -73,8 +74,8 @@ const encryptOperation = () => {
         //     }
         // }
 
-        console.log(key_sub);
-        console.log(keyPosition);
+        // console.log(key_sub);
+        // console.log(keyPosition);
 
 
 
@@ -86,7 +87,7 @@ const encryptOperation = () => {
         while (encryptField_sub.length % key_sub.length != 0) {
             encryptField_sub.push("*")
         };
-        encryptFieldArray.push(0);
+        // encryptFieldArray.push(0);
         for (let i = 0; i < encryptField_sub.length; i += key_sub.length) {
             encryptFieldArray.push(encryptField_sub.slice(i, i + key_sub.length));
         }
@@ -95,16 +96,23 @@ const encryptOperation = () => {
 
 
         //              Encryption process
-        let finalEncryptedArray = "";
-        let keyIdAccess = 0;
-        while (keyIdAccess < key_sub.length) {
-            for (let i = 1; i <= encryptFieldArray.length - 1; i++) {
-                finalEncryptedArray += encryptFieldArray[i][keyPosFinal[keyIdAccess]];
+        var finalEncryptedArray = "";
+        let counterChecker = 0;
+        for (let k in keyPosFinal) {
+            for (let i in encryptFieldArray) {
+                finalEncryptedArray += encryptFieldArray[i][keyPosFinal[k]];
             }
-            // keyIdAccess == key_sub.length - 1 ? 0 : finalEncryptedArray += "_";
             finalEncryptedArray += "_";
-            keyIdAccess++;
         }
+
+
+        // for (var keyIdAccess = 0; keyIdAccess < keyPosFinal.length; keyIdAccess++) {
+        //     for (let i = 0; i < encryptFieldArray.length; i++) {
+        //         finalEncryptedArray += encryptFieldArray[i][keyPosFinal[keyIdAccess]];
+        //     }
+        //     finalEncryptedArray += "_";
+        // }
+        //keyIdAccess++;
         console.log(finalEncryptedArray);
         decryptedField.value = finalEncryptedArray;
     }
@@ -113,6 +121,16 @@ const encryptOperation = () => {
 encrypt.addEventListener("click", () => {
     encryptOperation();
 })
+
+
+
+
+
+
+
+
+
+
 
 const reverseOperation = () => {
     let temp = encryptContText.innerText;
@@ -123,6 +141,16 @@ const reverseOperation = () => {
 reverseButton.addEventListener("click", () => {
     reverseOperation();
 })
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -182,23 +210,25 @@ const decryptOperation = () => {
         for (let i = 0; i < decryptionArraySupplement.length; i += key_sub.length) {
             decryptionArrayFinal.push(decryptionArraySupplement.slice(i, i + key_sub.length));
         }
-
-
         console.log(decryptionArrayFinal);
         //console.log(checkWordLength);
         console.log(i);
-        let finalDecryptedArray = "";
-        let keyIdAccess = 0;
-        while (keyIdAccess < key_sub.length) {
-            for (let i = 1; i < decryptionArrayFinal.length; i++) {
-                finalDecryptedArray += decryptionArrayFinal[keyPosFinal[keyIdAccess]][i];
+        var finalDecryptedArray = "";
+        for (let i = 0; i < decryptionArrayFinal.length; i++) {
+            for (let keyIdAccess = 0; keyIdAccess < key_sub.length; keyIdAccess++) {
+                finalDecryptedArray += decryptionArrayFinal[i][keyIdAccess];
+                // if (typeof(decryptionArrayFinal[keyPosFinal[keyIdAccess]][i]) == 'undefined') {
+                //     i++;
+                // } else {
+                //     finalDecryptedArray += decryptionArrayFinal[i][keyIdAccess];
+                // }
+                //keyIdAccess == key_sub.length - 1 ? 0 : finalEncryptedArray += "_";
             }
-            // keyIdAccess == key_sub.length - 1 ? 0 : finalEncryptedArray += "_";
             finalDecryptedArray += "_";
-            keyIdAccess++;
         }
-        console.log(finalDecryptedArray);
     }
+    console.log(finalDecryptedArray);
+    //encryptField.value = finalDecryptedArray;
 }
 
 decrypt.addEventListener("click", () => {
