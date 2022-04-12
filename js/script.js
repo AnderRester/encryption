@@ -8,8 +8,8 @@ const key = document.getElementById("key");
 
 //                  Reverse
 const reverseButton = document.getElementById("reverse_button");
-const encryptContText = document.getElementById("encrypt_cont_text");
-const decryptContText = document.getElementById("decrypt_cont_text");
+// const encryptContText = document.getElementById("encrypt_cont_text");
+// const decryptContText = document.getElementById("decrypt_cont_text");
 
 //                  Decryption
 const decryptionField = document.getElementById("decrypted_field");
@@ -119,36 +119,6 @@ encrypt.addEventListener("click", () => {
 
 
 
-
-
-
-
-
-
-const reverseOperation = () => {
-    let temp = encryptContText.innerText;
-    encryptContText.innerHTML = decryptContText.innerHTML;
-    decryptContText.innerHTML = temp;
-}
-
-reverseButton.addEventListener("click", () => {
-    reverseOperation();
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //                     Decrypt function
 const decryptOperation = () => {
     if (key.value == "") {
@@ -186,8 +156,8 @@ const decryptOperation = () => {
         console.log(keyPosFinal_1);
         // Reverse key attempt
 
-        
-        
+
+
 
 
         const keyReverse = [];
@@ -209,48 +179,69 @@ const decryptOperation = () => {
 
 
 
-            //                  Check word length
-            const getWordLength = () => {
-                let i = 0;
-                while (decryptionField_sub[i] != "_") {
-                    i++
-                }
-                return i;
+        //                  Check word length
+        const getWordLength = () => {
+            let i = 0;
+            while (decryptionField_sub[i] != "_") {
+                i++
             }
+            return i;
+        }
         let wordLength = getWordLength();
         let decryptionSuppArray = [];
         console.log("111");
         console.log(decryptionField_sub.length);
         decryptionField_sub = decryptionField_sub.filter(item => item != "_");
+
+        //                      Decryption
         let backToReality = [];
-        // for(let i = 0; i < (keyPosFinal_1).length; i++) {
-        for (let i in keyPosFinal_1) {
+        // for (let i = 0; i < keyPosFinal_1.length; i++) {
+        for (let i = 0; i < keyPosFinal_1.length; i++) {
+            console.log(i);
             decryptionSuppArray.splice(i, 0, decryptionField_sub.splice(0, wordLength));
         }
+        // for (let i = 0; i < keyPosFinal_1.length; i++) {
+        //     let tempString = "";
+        //     tempString = decryptionSuppArray[i];
+        //     tempString = tempString.toString().split(',');
+        //     backToReality.push(tempString);
+        // }
+        //}
         console.log(decryptionSuppArray);
-        console.log("Print");
-        for (let i = 0; i < keyPosFinal.length; i++) {
-            // for (let m = 0; m < keyPosFinal.length; m++) {
-            for (let m in keyPosFinal_1) {
-                if (keyPosFinal[i] == keyPosFinal_1[m]) {
-                    backToReality.splice(i, 0, decryptionSuppArray[m]);
-                }
+        // console.log(backToReality);
+        // // for(let i = 0; i < (keyPosFinal_1).length; i++) {
+        // for (let i in keyPosFinal_1) {
+        //     decryptionSuppArray.splice(i, 0, decryptionField_sub.splice(0, wordLength));
+        // }
+        // console.log(decryptionSuppArray);
+        // console.log("Print");
+        // for (let i = 0; i < keyPosFinal.length; i++) {
+        //     // for (let m = 0; m < keyPosFinal.length; m++) {
+        //     for (let m in keyPosFinal_1) {
+        //         if (keyPosFinal[i] == keyPosFinal_1[m]) {
+        //             backToReality.splice(i, 0, decryptionSuppArray[m]);
+        //         }
+        //     }
+        // }
+        // console.log(backToReality);
+        // console.log(1);
+
+
+        var finalDecryptedArray = [];
+        // for (let k in keyPosFinal_1) {
+        for (let k = 0; k < wordLength; k++) {
+            for (let i in decryptionSuppArray) {
+                finalDecryptedArray.push(decryptionSuppArray[keyReverse[i]][k]);
             }
+            // finalDecryptedArray += "_";
         }
-        console.log(backToReality);
-        console.log(1);
-
-
-
-
-
-
-
-
-
-
-
-
+        // finalDecryptedArray.filter(item => item == "*")
+        // finalDecryptedArray.split('*');
+        console.log(finalDecryptedArray);
+        finalDecryptedArray = finalDecryptedArray.map(space => space == "*" ? space = " " : space);
+        finalDecryptedArray = finalDecryptedArray.join('');
+        console.log(finalDecryptedArray);
+        decryptionField.value = finalDecryptedArray;
 
 
 
