@@ -12,7 +12,7 @@ const encryptContText = document.getElementById("encrypt_cont_text");
 const decryptContText = document.getElementById("decrypt_cont_text");
 
 //                  Decryption
-const decryptedField = document.getElementById("decrypted_field");
+const decryptionField = document.getElementById("decrypted_field");
 const decrypt = document.getElementById("decrypt");
 const openFile = document.getElementById("openFile");
 
@@ -47,7 +47,7 @@ const encryptOperation = () => {
         let keyPosition = [];
         //              Key position
 
-        //              GOD MERCIFULL PLEASE FORGIVE ME
+        //              GOD MERCIFUL PLEASE FORGIVE ME
 
         for (let j = 0; j < en_alphabet.length; j++) {
             for (let k = 0; k < key_sub.length; k++) {
@@ -64,20 +64,13 @@ const encryptOperation = () => {
                 }
             }
         }
+        keyPosFinal_1 = []
+        for (let i = 0; i < keyPosFinal.length; i++) {
+            keyPosFinal_1.push(keyPosFinal.indexOf(i));
+        }
         console.log(keyPosition);
         console.log(keyPosFinal);
-        // for (let j = 0; j < en_alphabet.length; j++) {
-        //     for (let k = 0; k < key_sub.length; k++) {
-        //         if (key_sub[k] == en_alphabet[j]) {
-        //             keyPosition.push(k);
-        //         }
-        //     }
-        // }
-
-        // console.log(key_sub);
-        // console.log(keyPosition);
-
-
+        console.log(keyPosFinal_1);
 
 
         //              Encryption prepare
@@ -89,7 +82,8 @@ const encryptOperation = () => {
         };
         // encryptFieldArray.push(0);
         for (let i = 0; i < encryptField_sub.length; i += key_sub.length) {
-            encryptFieldArray.push(encryptField_sub.slice(i, i + key_sub.length));
+            // encryptFieldArray.push(encryptField_sub.slice(i, i + key_sub.length));
+            encryptFieldArray.splice(i, 0, encryptField_sub.slice(i, i + key_sub.length));
         }
         console.log(encryptFieldArray);
 
@@ -97,10 +91,9 @@ const encryptOperation = () => {
 
         //              Encryption process
         var finalEncryptedArray = "";
-        let counterChecker = 0;
         for (let k in keyPosFinal) {
             for (let i in encryptFieldArray) {
-                finalEncryptedArray += encryptFieldArray[i][keyPosFinal[k]];
+                finalEncryptedArray += encryptFieldArray[i][keyPosFinal_1[k]];
             }
             finalEncryptedArray += "_";
         }
@@ -114,7 +107,7 @@ const encryptOperation = () => {
         // }
         //keyIdAccess++;
         console.log(finalEncryptedArray);
-        decryptedField.value = finalEncryptedArray;
+        decryptionField.value = finalEncryptedArray;
     }
 }
 
@@ -158,17 +151,15 @@ reverseButton.addEventListener("click", () => {
 
 //                     Decrypt function
 const decryptOperation = () => {
-    let backToReality = [];
-
     if (key.value == "") {
         alert("You have not entered a key");
     } else {
-        let encryptField_sub = encryptField.value.split("", encryptField.value.length);
+        let decryptionField_sub = decryptionField.value.split("", decryptionField.value.length);
         let key_sub = key.value.split("", key.value.length);
         let keyPosition = [];
         //              Key position
 
-        //              GOD MERCIFULL PLEASE FORGIVE ME
+        //              GOD MERCIFUL PLEASE FORGIVE ME
 
         for (let j = 0; j < en_alphabet.length; j++) {
             for (let k = key_sub.length - 1; k >= 0; k--) {
@@ -185,49 +176,109 @@ const decryptOperation = () => {
                 }
             }
         }
-        console.log(keyPosFinal);
-        // for (let j = 0; j < en_alphabet.length; j++) {
-        //     for (let k = 0; k < key_sub.length; k++) {
-        //         if (key_sub[k] == en_alphabet[j]) {
-        //             keyPosition.push(k);
-        //         }
-        //     }
-        // }
-
+        keyPosFinal_1 = []
+        for (let i = 0; i < keyPosFinal.length; i++) {
+            keyPosFinal_1.push(keyPosFinal.indexOf(i));
+        }
         console.log(key_sub);
         console.log(keyPosition);
+        console.log(keyPosFinal);
+        console.log(keyPosFinal_1);
+        // Reverse key attempt
 
-        //                  Check word length
-        let decryptionArraySupplement = decryptedField.value.split("", decryptedField.value.length);
-        let i = 0;
-        while (decryptionArraySupplement[i] != "_") {
-            i++
+        
+        
+
+
+        const keyReverse = [];
+
+        for (let i = 0; i < keyPosFinal_1.length; i++) {
+            keyReverse.push(keyPosFinal_1.indexOf(i));
         }
+        console.log("---------------------------------");
+        console.log(keyPosFinal);
+        console.log(keyPosFinal_1);
+        console.log("---------------------------------");
+        console.log(keyPosFinal_1);
+        console.log(keyReverse);
+        console.log("---------------------------------");
 
-        let decryptionArrayFinal = [];
-        decryptionArraySupplement = decryptionArraySupplement.filter(item => item != "_");
 
-        for (let i = 0; i < decryptionArraySupplement.length; i += key_sub.length) {
-            decryptionArrayFinal.push(decryptionArraySupplement.slice(i, i + key_sub.length));
-        }
-        console.log(decryptionArrayFinal);
-        //console.log(checkWordLength);
-        console.log(i);
-        var finalDecryptedArray = "";
-        for (let i = 0; i < decryptionArrayFinal.length; i++) {
-            for (let keyIdAccess = 0; keyIdAccess < key_sub.length; keyIdAccess++) {
-                finalDecryptedArray += decryptionArrayFinal[i][keyIdAccess];
-                // if (typeof(decryptionArrayFinal[keyPosFinal[keyIdAccess]][i]) == 'undefined') {
-                //     i++;
-                // } else {
-                //     finalDecryptedArray += decryptionArrayFinal[i][keyIdAccess];
-                // }
-                //keyIdAccess == key_sub.length - 1 ? 0 : finalEncryptedArray += "_";
+
+
+
+
+
+            //                  Check word length
+            const getWordLength = () => {
+                let i = 0;
+                while (decryptionField_sub[i] != "_") {
+                    i++
+                }
+                return i;
             }
-            finalDecryptedArray += "_";
+        let wordLength = getWordLength();
+        let decryptionSuppArray = [];
+        console.log("111");
+        console.log(decryptionField_sub.length);
+        decryptionField_sub = decryptionField_sub.filter(item => item != "_");
+        let backToReality = [];
+        // for(let i = 0; i < (keyPosFinal_1).length; i++) {
+        for (let i in keyPosFinal_1) {
+            decryptionSuppArray.splice(i, 0, decryptionField_sub.splice(0, wordLength));
         }
+        console.log(decryptionSuppArray);
+        console.log("Print");
+        for (let i = 0; i < keyPosFinal.length; i++) {
+            // for (let m = 0; m < keyPosFinal.length; m++) {
+            for (let m in keyPosFinal_1) {
+                if (keyPosFinal[i] == keyPosFinal_1[m]) {
+                    backToReality.splice(i, 0, decryptionSuppArray[m]);
+                }
+            }
+        }
+        console.log(backToReality);
+        console.log(1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // let decryptionArraySupplement = decryptedField.value.split("", decryptedField.value.length);
+        // let i = 0;
+        // while (decryptionArraySupplement[i] != "_") {
+        //     i++
+        // }
+
+        // let decryptionArrayFinal = [];
+        // decryptionArraySupplement = decryptionArraySupplement.filter(item => item != "_");
+
+        // decryptionArrayFinal.splice(0, 0, (decryptionArraySupplement.slice(0, decryptionArraySupplement.length)));
+        // console.log(decryptionArrayFinal);
+        // console.log('///');
+        // console.log(i);
+        // let supp_len = i;
+        // console.log('///');
+        // var finalDecryptedArray = "";
+        // decryptedArrayPreReady = [];
+        // for(let i = 0; i < decryptionArrayFinal.length; i+=key_sub) {
+        //     decryptedArrayPreReady.splice(i, 0, decryptionArraySupplement.slice(i, i + key_sub.length));
+        // }
+        // console.log(1);
+        // console.log(decryptedArrayPreReady);
+        // console.log(1);
     }
-    console.log(finalDecryptedArray);
+    // console.log(finalDecryptedArray);
     //encryptField.value = finalDecryptedArray;
 }
 
